@@ -24,19 +24,22 @@ func (c *Circle) perimeter() float64 {
 }
 
 type Rectangle struct {
-  x1, x2, y1, y2 float64
+  x1, y1, x2, y2 float64
 }
 
 // easier to think of h x w, h=> y, w => x
 func (r *Rectangle) area() float64 {
   h := distance(r.x1, r.y1, r.x1, r.y2)
   w := distance(r.x1, r.y1, r.x2, r.y1)
-
+  fmt.Println(h, w)
   return h * w
 }
 
 func (r *Rectangle) perimeter() float64 {
-  h := distance(r.x1, r.y1) // calc.. individually... or?
+  h := distance(r.x1, r.y1, r.x1, r.y2) // calc.. individually... or?
+  w := distance(r.x1, r.y1, r.x2, r.y1)
+
+  return 2 * (h + w)
 }
 
 // pythags theorem a^2 + b^2 = c^2
@@ -47,5 +50,9 @@ func distance(x1, y1, x2, y2 float64) float64 {
 }
 
 func main() {
+  r := Rectangle{0, 5, 10, 15}
+  c := Circle{0, 0, 5}
 
+  fmt.Println(r.area())
+  fmt.Println(c.area())
 }
